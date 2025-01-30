@@ -5,14 +5,18 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter the number of feet: ");
-        double feet = scanner.nextDouble();
+        System.out.print("Enter deposit amount: ");
+        double deposit = scanner.nextDouble();
 
-        double miles = feet / 5280;
+        double interestRate = 0.01;
+        double interest = deposit * interestRate;
+        double totalAmount = deposit + interest;
 
-        System.out.println(feet + " feet is equal to " + miles + " miles.");
+        System.out.println("Interest: " + interest);
+        System.out.println("Total amount after interest: " + totalAmount);
     }
 }
+
 
 
 
