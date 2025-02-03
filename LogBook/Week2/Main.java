@@ -13,10 +13,16 @@ public class Main {
 
         System.out.println("You were born in " + yearOfBirth);
 
-        if(age >= 18) {
+        if(age >= 18)
 
-            System.out.println("You're 18 years old or over");
+            System.out.println("You're 18 years old or over.");
+
+          else
+
+             System.out.println("You're under 18.");
+
+
 
         }
     }
-}
+
