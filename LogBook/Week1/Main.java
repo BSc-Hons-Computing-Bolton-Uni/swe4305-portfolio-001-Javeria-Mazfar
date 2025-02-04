@@ -13,7 +13,7 @@ public class Main {
         double totalAmount = deposit + interest;
 
         System.out.println("Interest: " + interest);
-        System.out.println("Total  after interest: " + totalAmount);
+        System.out.println("Total amount after interest: " + totalAmount);
     }
 }
 
