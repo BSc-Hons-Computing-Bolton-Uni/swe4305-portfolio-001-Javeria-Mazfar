@@ -6,15 +6,34 @@ public class Main {
     public static void main(String[] args) {
         // Create a Scanner object to read input
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter your age: ");
-        int age = scanner.nextInt();
+        System.out.print("Enter your letter grade (A-F): ");
+        char grade = scanner.next().charAt(0);
 
-        // Check if the user is 18 or older
-        if (age >= 18) {
-            System.out.println("You are 18 or older.");
-        } else {
-            System.out.println("You are younger than 18.");
+        // Convert letter grade to university classification
+        switch (grade) {
+            case 'A':
+                System.out.println("1st");
+                break;
+            case 'B':
+                System.out.println("2:1");
+                break;
+            case 'C':
+                System.out.println("2:2");
+                break;
+            case 'D':
+                System.out.println("3rd");
+                break;
+            case 'E':
+                System.out.println("ordinary");
+                break;
+            case 'F':
+                System.out.println("fail");
+                break;
+            default:
+                System.out.println("Invalid grade");
+                break;
         }
     }
 }
+
 
