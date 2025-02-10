@@ -4,28 +4,26 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        // Create a Scanner object to read input
         Scanner scanner = new Scanner(System.in);
-        char choice;
+        System.out.print("Enter your exam mark (0-100): ");
+        int mark = scanner.nextInt();
 
-        do {
-            // Ask the user for a number to print its times table
-            System.out.print("Enter the number for the times table: ");
-            int num = scanner.nextInt();
-
-            // Loop to print the chosen times multiplication table
-            for (int i = 1; i <= 12; i++) {
-                System.out.println(i + " x " + num + " = " + (i * num));
-            }
-
-            // Ask if the user wants to continue
-            System.out.print("Do you want to see another times table? (Y/N): ");
-            choice = scanner.next().charAt(0);
-        } while (choice == 'Y' || choice == 'y');
-
-        // Print goodbye message if the user decides to stop
-        System.out.println("Goodbye!");
+        // Determine and print the grade based on the mark
+        if (mark >= 70) {
+            System.out.println("Grade: A");
+        } else if (mark >= 60) {
+            System.out.println("Grade: B");
+        } else if (mark >= 50) {
+            System.out.println("Grade: C");
+        } else if (mark >= 40) {
+            System.out.println("Grade: D");
+        } else {
+            System.out.println("Grade: F");
+        }
     }
 }
+
 
 
 
