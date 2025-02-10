@@ -1,20 +1,19 @@
 package LogBook.Week2;
 
-// Java Program to print the multiplication table of the number N using for loop
+import java.util.Scanner;
 
-class GFG {
-    public static void main(String[] args)
-    {
-        // number n for which we have to print the
-        // multiplication table.
-        int N = 7;
+public class Main {
+    public static void main(String[] args) {
+        // Create a Scanner object to read input
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter your age: ");
+        int age = scanner.nextInt();
 
-        // looping from 1 to 10 to print the multiplication
-        // table of the number.
-        // using for loop
-        for (int i = 1; i <= 12; i++) {
-            // printing the N*i,ie ith multiple of N.
-            System.out.println(N + " * " + i + " = " + N * i);
+        // Check if the user is 18 or older
+        if (age >= 18) {
+            System.out.println("You are 18 or older.");
+        } else {
+            System.out.println("You are younger than 18.");
         }
     }
 }
