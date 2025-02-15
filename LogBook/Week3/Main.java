@@ -11,8 +11,6 @@ public class Main {
         // Enrol the student in the course
         student.enrol(course);
 
-        // Call the print method to test the values
-        student.print();
     }
 }
 
