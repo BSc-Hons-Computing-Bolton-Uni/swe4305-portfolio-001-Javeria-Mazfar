@@ -26,6 +26,11 @@ class Course {
     void print() {
         System.out.println("Course Code: " + code);
         System.out.println("Course Name: " + name);
+        // Print details of modules
+        for (Module module : modules) {
+            System.out.println("Module Name: " + module.name);
+            System.out.println("Module Code: " + module.code);
+        }
     }
 }
 
