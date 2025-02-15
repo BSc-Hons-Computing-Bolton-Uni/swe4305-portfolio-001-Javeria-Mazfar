@@ -1,8 +1,8 @@
 package LogBook.Week4;
 
-class Module {
-    String name;
-    String code;
+public class Module {
+    public String name;
+    public String code;
 
     // Constructor to initialize module name and code
     public Module(String name, String code) {
