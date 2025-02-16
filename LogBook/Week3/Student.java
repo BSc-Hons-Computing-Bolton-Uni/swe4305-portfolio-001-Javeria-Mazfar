@@ -7,12 +7,14 @@ class Student {
     String name;
     Course course;
     int[] marks;  // Array to store four integer marks
+    String[] modules;  // Array to store module names
 
     // Constructor
-    public Student(int id, String name) {
+    public Student(int id, String name, String[] modules, int[] marks) {
         this.id = id;
         this.name = name;
         this.marks = new int[4];  // Initialize the marks array to store four integer mark
+        this.modules = modules;
     }
 
     // Print method
