@@ -12,16 +12,16 @@ public class Module {
 
     // Method to convert a mark to a letter grade
     public String convertMarkToGrade(int mark) {
-        if (mark >= 90) {
-            return "A";
-        } else if (mark >= 80) {
-            return "B";
-        } else if (mark >= 70) {
-            return "C";
-        } else if (mark >= 60) {
-            return "D";
+        if (mark >= 70 && mark <= 100) {
+            return "A First Class";
+        } else if (mark >= 60 && mark <= 69) {
+            return "B Upper Second Class";
+        } else if (mark >= 50 && mark <= 59) {
+            return "C Lower Second Class";
+        } else if (mark >= 40 && mark <= 49) {
+            return "D Third Class";
         } else {
-            return "F";
+            return "F Fail";
         }
     }
 }

@@ -1,5 +1,7 @@
 package LogBook.Week3;
+
 import java.util.Random;
+import LogBook.Week4.Module;  // Import the Module class
 
 class Student {
 
@@ -9,6 +11,7 @@ class Student {
     Course course;
     int[] marks;  // Array to store four integer marks
     String[] modules;  // Array to store module names
+    Module[] moduleObjects;  // Array to store Module objects
 
     // Constructor
     public Student(int id, String name, String[] modules, int[] marks) {
@@ -16,6 +19,12 @@ class Student {
         this.name = name;
         this.marks = new int[4];  // Initialize the marks array to store four integer marks
         this.modules = modules;
+
+        // Create Module objects
+        this.moduleObjects = new Module[4];
+        for (int i = 0; i < modules.length; i++) {
+            this.moduleObjects[i] = new Module(modules[i], "M" + (i + 1));
+        }
 
         // Assign random marks to each module using the random number generator
         generateRandomMarks();
@@ -40,10 +49,11 @@ class Student {
             System.out.println("No course enrolled.");
         }
 
-        // Print module details and corresponding marks
-        if (modules != null && marks != null) {
+        // Print module details and corresponding marks and grades
+        if (modules != null && marks != null && moduleObjects != null) {
             for (int i = 0; i < modules.length; i++) {
-                System.out.println("Module: " + modules[i] + " - Mark: " + marks[i]);
+                String grade = moduleObjects[i].convertMarkToGrade(marks[i]);
+                System.out.println("Module: " + modules[i] + " - Mark: " + marks[i] + " - Grade: " + grade);
             }
         } else {
             System.out.println("No modules or marks available.");
@@ -55,5 +65,6 @@ class Student {
         this.course = course;
     }
 }
+
 
 
