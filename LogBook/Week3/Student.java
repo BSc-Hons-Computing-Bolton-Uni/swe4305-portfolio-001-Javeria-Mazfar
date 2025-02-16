@@ -27,6 +27,15 @@ class Student {
         } else {
             System.out.println("No course enrolled.");
         }
+
+        // Print module details and corresponding marks
+        if (modules != null && marks != null) {
+            for (int i = 0; i < modules.length; i++) {
+                System.out.println("Module: " + modules[i] + " - Mark: " + marks[i]);
+            }
+        } else {
+            System.out.println("No modules or marks available.");
+        }
     }
 
     // Enrol method
