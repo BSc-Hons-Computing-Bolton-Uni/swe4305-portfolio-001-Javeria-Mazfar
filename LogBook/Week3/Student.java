@@ -52,8 +52,8 @@ class Student {
         // Print module details and corresponding marks and grades
         if (modules != null && marks != null && moduleObjects != null) {
             for (int i = 0; i < modules.length; i++) {
-                String grade = moduleObjects[i].convertMarkToGrade(marks[i]);
-                System.out.println("Module: " + modules[i] + " - Mark: " + marks[i] + " - Grade: " + grade);
+                Module.Grade grade = moduleObjects[i].convertMarkToGrade(marks[i]);
+                System.out.println("Module: " + modules[i] + " - Mark: " + marks[i] + " - Grade: " + grade.getDescription());
             }
         } else {
             System.out.println("No modules or marks available.");
@@ -65,6 +65,7 @@ class Student {
         this.course = course;
     }
 }
+
 
 
 

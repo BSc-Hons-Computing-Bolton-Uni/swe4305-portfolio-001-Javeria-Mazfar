@@ -10,20 +10,42 @@ public class Module {
         this.code = code;
     }
 
+    // Enum for Grade
+    public enum Grade {
+        A("First Class"),
+        B("Upper Second Class"),
+        C("Lower Second Class"),
+        D("Third Class"),
+        F("Fail");
+
+        private final String description;
+
+        Grade(String description) {
+            this.description = description;
+        }
+
+        // Method to get the description of the grade
+        public String getDescription() {
+            return description;
+        }
+    }
+
     // Method to convert a mark to a letter grade
-    public String convertMarkToGrade(int mark) {
+    public Grade convertMarkToGrade(int mark) {
         if (mark >= 70 && mark <= 100) {
-            return "A First Class";
+            return Grade.A;
         } else if (mark >= 60 && mark <= 69) {
-            return "B Upper Second Class";
+            return Grade.B;
         } else if (mark >= 50 && mark <= 59) {
-            return "C Lower Second Class";
+            return Grade.C;
         } else if (mark >= 40 && mark <= 49) {
-            return "D Third Class";
+            return Grade.D;
         } else {
-            return "F Fail";
+            return Grade.F;
         }
     }
 }
+
+
 
 
