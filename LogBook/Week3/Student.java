@@ -1,7 +1,8 @@
 package LogBook.Week3;
 
 import java.util.Random;
-import LogBook.Week4.Module;  // Import the Module class
+import LogBook.Week4.Module;
+import LogBook.Week4.ModuleMark;  // Import the ModuleMark class
 
 class Student {
 
@@ -9,33 +10,26 @@ class Student {
     int id;
     String name;
     Course course;
-    int[] marks;  // Array to store four integer marks
-    String[] modules;  // Array to store module names
-    Module[] moduleObjects;  // Array to store Module objects
+    ModuleMark[] moduleMarks;  // Array to store ModuleMark objects
 
     // Constructor
-    public Student(int id, String name, String[] modules, int[] marks) {
+    public Student(int id, String name, String[] modules) {
         this.id = id;
         this.name = name;
-        this.marks = new int[4];  // Initialize the marks array to store four integer marks
-        this.modules = modules;
+        this.moduleMarks = new ModuleMark[modules.length];  // Initialize the ModuleMark array
 
-        // Create Module objects
-        this.moduleObjects = new Module[4];
+        // Create Module objects and assign random marks
         for (int i = 0; i < modules.length; i++) {
-            this.moduleObjects[i] = new Module(modules[i], "M" + (i + 1));
+            Module module = new Module(modules[i], "M" + (i + 1));
+            int mark = generateRandomMark();
+            this.moduleMarks[i] = new ModuleMark(module, mark);
         }
-
-        // Assign random marks to each module using the random number generator
-        generateRandomMarks();
     }
 
     // Method to generate random marks between 0 and 100
-    private void generateRandomMarks() {
+    private int generateRandomMark() {
         Random rand = new Random();
-        for (int i = 0; i < marks.length; i++) {
-            marks[i] = rand.nextInt(101);  // Generates a random number between 0 and 100 (inclusive)
-        }
+        return rand.nextInt(101);  // Generates a random number between 0 and 100 (inclusive)
     }
 
     // Print method
@@ -50,10 +44,12 @@ class Student {
         }
 
         // Print module details and corresponding marks and grades
-        if (modules != null && marks != null && moduleObjects != null) {
-            for (int i = 0; i < modules.length; i++) {
-                Module.Grade grade = moduleObjects[i].convertMarkToGrade(marks[i]);
-                System.out.println("Module: " + modules[i] + " - Mark: " + marks[i] + " - Grade: " + grade.getDescription());
+        if (moduleMarks != null) {
+            for (ModuleMark moduleMark : moduleMarks) {
+                Module module = moduleMark.getModule();
+                int mark = moduleMark.getMark();
+                Module.Grade grade = module.convertMarkToGrade(mark);
+                System.out.println("Module: " + module.name + " - Mark: " + mark + " - Grade: " + grade.getDescription());
             }
         } else {
             System.out.println("No modules or marks available.");
@@ -65,6 +61,7 @@ class Student {
         this.course = course;
     }
 }
+
 
 
 
