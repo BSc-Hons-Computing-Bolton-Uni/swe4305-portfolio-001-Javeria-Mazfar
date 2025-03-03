@@ -1,8 +1,6 @@
-package LogBook.Week3;
+package LogBook.Week4;
 
 import java.util.Random;
-import LogBook.Week4.Module;
-import LogBook.Week4.ModuleMark;  // Import the ModuleMark class
 
 class Student {
 
