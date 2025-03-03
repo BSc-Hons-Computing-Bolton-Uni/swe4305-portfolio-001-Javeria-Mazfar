@@ -44,5 +44,30 @@ public class ModuleMark {
                 System.out.println("Student: " + student.name + " - Module: " + student.moduleMarks[i].getModule().name + " - Mark: " + mark);
             }
         }
+
+        // Calculate min, max, and mean marks
+        ModuleMark minMark = students.get(0).moduleMarks[0];
+        ModuleMark maxMark = students.get(0).moduleMarks[0];
+        double totalMarks = 0;
+        int count = 0;
+
+        for (Student student : students) {
+            for (ModuleMark moduleMark : student.moduleMarks) {
+                if (moduleMark.getMark() < minMark.getMark()) {
+                    minMark = moduleMark;
+                }
+                if (moduleMark.getMark() > maxMark.getMark()) {
+                    maxMark = moduleMark;
+                }
+                totalMarks += moduleMark.getMark();
+                count++;
+            }
+        }
+
+        double meanMark = totalMarks / count;
+
+        System.out.println("Minimum Mark: " + minMark.getMark() + " (Module: " + minMark.getModule().name + ")");
+        System.out.println("Maximum Mark: " + maxMark.getMark() + " (Module: " + maxMark.getModule().name + ")");
+        System.out.println("Mean Mark: " + meanMark);
     }
 }
