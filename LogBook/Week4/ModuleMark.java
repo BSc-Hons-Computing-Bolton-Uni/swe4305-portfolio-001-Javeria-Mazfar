@@ -50,14 +50,18 @@ public class ModuleMark {
         ModuleMark maxMark = students.get(0).moduleMarks[0];
         double totalMarks = 0;
         int count = 0;
+        String minStudent = "";
+        String maxStudent = "";
 
         for (Student student : students) {
             for (ModuleMark moduleMark : student.moduleMarks) {
                 if (moduleMark.getMark() < minMark.getMark()) {
                     minMark = moduleMark;
+                    minStudent = student.name;  // Store the student for the minimum mark
                 }
                 if (moduleMark.getMark() > maxMark.getMark()) {
                     maxMark = moduleMark;
+                    maxStudent = student.name;  // Store the student for the maximum mark
                 }
                 totalMarks += moduleMark.getMark();
                 count++;
@@ -66,8 +70,10 @@ public class ModuleMark {
 
         double meanMark = totalMarks / count;
 
-        System.out.println("Minimum Mark: " + minMark.getMark() + " (Module: " + minMark.getModule().name + ")");
-        System.out.println("Maximum Mark: " + maxMark.getMark() + " (Module: " + maxMark.getModule().name + ")");
+        // Print the minimum, maximum, and mean marks along with the students
+        System.out.println("Minimum Mark: " + minMark.getMark() + " (Student: " + minStudent + ", Module: " + minMark.getModule().name + ")");
+        System.out.println("Maximum Mark: " + maxMark.getMark() + " (Student: " + maxStudent + ", Module: " + maxMark.getModule().name + ")");
         System.out.println("Mean Mark: " + meanMark);
     }
 }
+
