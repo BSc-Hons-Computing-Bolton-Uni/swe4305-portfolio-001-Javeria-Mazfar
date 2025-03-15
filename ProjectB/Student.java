@@ -1,7 +1,5 @@
 package ProjectB;
 
-// File: Student.java
-
 /**
  * Represents a student in the system.
  */
@@ -32,3 +30,4 @@ public class Student {
         this.name = name;
     }
 }
+

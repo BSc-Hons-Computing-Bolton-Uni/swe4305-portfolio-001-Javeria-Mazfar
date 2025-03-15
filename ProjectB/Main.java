@@ -7,6 +7,8 @@ public class Main {
     private static List<Module> modules = new ArrayList<>();
 
     public static void main(String[] args) {
+        initializeSampleData();
+
         try (Scanner scanner = new Scanner(System.in)) {
             int choice;
 
@@ -35,6 +37,74 @@ public class Main {
         }
     }
 
+    // Correct implementation of `initializeSampleData`
+    private static void initializeSampleData() {
+// Adding 25 students with custom IDs and names
+        students.add(new Student("100190217", "Javeria"));
+        students.add(new Student("100190218", "Alice"));
+        students.add(new Student("100190219", "Bob"));
+        students.add(new Student("100190220", "Charlie"));
+        students.add(new Student("100190221", "Diana"));
+        students.add(new Student("100190222", "Ethan"));
+        students.add(new Student("100190223", "Farah"));
+        students.add(new Student("100190224", "George"));
+        students.add(new Student("100190225", "Hannah"));
+        students.add(new Student("100190226", "Ian"));
+        students.add(new Student("100190227", "Jasmine"));
+        students.add(new Student("100190228", "Kyle"));
+        students.add(new Student("100190229", "Lila"));
+        students.add(new Student("100190230", "Mason"));
+        students.add(new Student("100190231", "Nina"));
+        students.add(new Student("100190232", "Omar"));
+        students.add(new Student("100190233", "Penny"));
+        students.add(new Student("100190234", "Quinn"));
+        students.add(new Student("100190235", "Rachel"));
+        students.add(new Student("100190236", "Sam"));
+        students.add(new Student("100190237", "Tina"));
+        students.add(new Student("100190238", "Umar"));
+        students.add(new Student("100190239", "Violet"));
+        students.add(new Student("100190240", "William"));
+        students.add(new Student("100190241", "Zara"));
+
+
+// Adding 5 modules with custom names
+        modules.add(new Module("COM4301", "Maths For Computing"));
+        modules.add(new Module("COM4302", "CS Fundamentals"));
+        modules.add(new Module("SWE4303", "Computing Infrastructure"));
+        modules.add(new Module("SWE4304", "Databases"));
+        modules.add(new Module("SWE4305", "OO Programming"));
+
+
+        // Assigning random marks to students for each module
+        Random random = new Random();
+        for (Module module : modules) {
+            for (Student student : students) {
+                int mark = random.nextInt(101); // Random marks between 0 and 100
+                module.addOrUpdateStudentMark(student, mark);
+            }
+        }
+
+        System.out.println("Sample data initialized successfully!");
+    }
+
+    // Correct implementation of `getValidatedMenuChoice`
+    private static int getValidatedMenuChoice(Scanner scanner, String prompt, int min, int max) {
+        int choice;
+        while (true) {
+            try {
+                System.out.print(prompt);
+                choice = Integer.parseInt(scanner.nextLine().trim());
+                if (choice >= min && choice <= max) {
+                    return choice;
+                }
+                System.out.println("Error: Please enter a number between " + min + " and " + max + ".");
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Invalid input. Please enter a valid number.");
+            }
+        }
+    }
+
+    // Correct implementation of `manageStudents`
     private static void manageStudents(Scanner scanner) {
         System.out.println("1. Add Student\n2. Edit Student\n3. Delete Student");
         int subChoice = getValidatedMenuChoice(scanner, "Enter your choice (1-3): ", 1, 3);
@@ -73,6 +143,13 @@ public class Main {
                 }
             }
         }
+    }
+
+    private static Student findStudent(String id) {
+        return students.stream()
+                .filter(student -> student.getStudentID().equals(id))
+                .findFirst()
+                .orElse(null);
     }
 
     private static void manageModules(Scanner scanner) {
@@ -115,6 +192,13 @@ public class Main {
         }
     }
 
+    private static Module findModule(String code) {
+        return modules.stream()
+                .filter(module -> module.getModuleCode().equals(code))
+                .findFirst()
+                .orElse(null);
+    }
+
     private static void inputStudentMarks(Scanner scanner) {
         System.out.print("Enter student ID: ");
         String id = scanner.nextLine();
@@ -132,9 +216,22 @@ public class Main {
             return;
         }
 
+        // Check if the student already has a mark for the module
+        if (module.getStudentMarks().containsKey(student)) {
+            System.out.println("This student already has a mark for this module.");
+            System.out.println("Current mark: " + module.getStudentMarks().get(student));
+            System.out.print("Do you want to update the mark? (yes/no): ");
+            String response = scanner.nextLine().trim().toLowerCase();
+            if (!response.equals("yes")) {
+                System.out.println("Mark not updated.");
+                return;
+            }
+        }
+
+        // Input and update the mark
         int mark = getValidatedMenuChoice(scanner, "Enter mark (0-100): ", 0, 100);
         module.addOrUpdateStudentMark(student, mark);
-        System.out.println("Mark added successfully!");
+        System.out.println("Mark has been added/updated successfully!");
     }
 
     private static void displayGrades() {
@@ -148,59 +245,34 @@ public class Main {
     }
 
     private static void viewStatistics() {
+        System.out.println("\n--- Module Statistics ---");
         for (Module module : modules) {
             System.out.println("\nModule: " + module.getModuleName());
-            System.out.println("Mean Mark: " + module.calculateMean());
+            if (module.getStudentMarks().isEmpty()) {
+                System.out.println("No marks available for this module.");
+                continue;
+            }
+            System.out.printf("Mean Mark: %.2f%n", module.calculateMean());
             System.out.println("Minimum Mark: " + module.calculateMin());
             System.out.println("Maximum Mark: " + module.calculateMax());
         }
     }
 
     private static void displayGradeProfile() {
+        System.out.println("\n--- Grade Profile ---");
         for (Module module : modules) {
             System.out.println("\nModule: " + module.getModuleName());
+            if (module.getStudentMarks().isEmpty()) {
+                System.out.println("No marks available for this module.");
+                continue;
+            }
             Map<String, Integer> profile = module.calculateGradeProfile();
             int totalStudents = module.getStudentMarks().size();
 
-            if (totalStudents == 0) {
-                System.out.println("No student marks available.");
-                continue;
-            }
-
             profile.forEach((grade, count) -> {
                 double percentage = (count / (double) totalStudents) * 100;
-                System.out.printf("%s: %.2f%% (%d student(s))\n", grade, percentage, count);
+                System.out.printf("%s: %.2f%% (%d student(s))%n", grade, percentage, count);
             });
-        }
-    }
-
-    private static Student findStudent(String id) {
-        return students.stream()
-                .filter(student -> student.getStudentID().equals(id))
-                .findFirst()
-                .orElse(null);
-    }
-
-    private static Module findModule(String code) {
-        return modules.stream()
-                .filter(module -> module.getModuleCode().equals(code))
-                .findFirst()
-                .orElse(null);
-    }
-
-    private static int getValidatedMenuChoice(Scanner scanner, String prompt, int min, int max) {
-        int choice;
-        while (true) {
-            try {
-                System.out.print(prompt);
-                choice = Integer.parseInt(scanner.nextLine().trim());
-                if (choice >= min && choice <= max) {
-                    return choice;
-                }
-                System.out.println("Error: Please enter a number between " + min + " and " + max + ".");
-            } catch (NumberFormatException e) {
-                System.out.println("Error: Invalid input. Please enter a valid number.");
-            }
         }
     }
 }

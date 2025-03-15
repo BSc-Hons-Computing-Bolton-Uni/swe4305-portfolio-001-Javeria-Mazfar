@@ -1,7 +1,5 @@
 package ProjectB;
 
-// File: GradeCalculator.java
-
 /**
  * Utility class for calculating grades based on marks.
  */
