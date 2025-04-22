@@ -243,12 +243,25 @@ public class Main {
     }
 
     private static void displayGrades() {
-        for (Module module : modules) {
-            System.out.println("\nModule: " + module.getModuleName());
-            module.getStudentMarks().forEach((student, mark) -> {
+        Scanner scanner = new Scanner(System.in); // Add Scanner for user input
+        System.out.print("Enter module code: ");
+        String moduleCode = scanner.nextLine(); // Prompt user for module code
+
+        // Search for the module with the entered code
+        Module selectedModule = modules.stream()
+                .filter(module -> module.getModuleCode().equalsIgnoreCase(moduleCode))
+                .findFirst()
+                .orElse(null);
+
+        // Check if the module exists
+        if (selectedModule != null) {
+            System.out.println("\nModule: " + selectedModule.getModuleName());
+            selectedModule.getStudentMarks().forEach((student, mark) -> {
                 String grade = GradeCalculator.calculateGrade(mark);
                 System.out.println("Student: " + student.getName() + " | Mark: " + mark + " | Grade: " + grade);
             });
+        } else {
+            System.out.println("Module not found. Please ensure you entered the correct module code.");
         }
     }
 
