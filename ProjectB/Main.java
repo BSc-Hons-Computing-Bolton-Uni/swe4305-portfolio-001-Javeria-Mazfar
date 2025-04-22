@@ -266,16 +266,29 @@ public class Main {
     }
 
     private static void viewStatistics() {
-        System.out.println("\n--- Module Statistics ---");
-        for (Module module : modules) {
-            System.out.println("\nModule: " + module.getModuleName());
-            if (module.getStudentMarks().isEmpty()) {
+        Scanner scanner = new Scanner(System.in); // Add a scanner for user input
+        System.out.print("Enter module code: ");
+        String moduleCode = scanner.nextLine(); // Prompt user for module code
+
+        // Search for the module with the entered code
+        Module selectedModule = modules.stream()
+                .filter(module -> module.getModuleCode().equalsIgnoreCase(moduleCode))
+                .findFirst()
+                .orElse(null);
+
+        // Check if the module exists
+        if (selectedModule != null) {
+            System.out.println("\n--- Module Statistics ---");
+            System.out.println("Module: " + selectedModule.getModuleName());
+            if (selectedModule.getStudentMarks().isEmpty()) {
                 System.out.println("No marks available for this module.");
-                continue;
+            } else {
+                System.out.printf("Mean Mark: %.2f%n", selectedModule.calculateMean());
+                System.out.println("Minimum Mark: " + selectedModule.calculateMin());
+                System.out.println("Maximum Mark: " + selectedModule.calculateMax());
             }
-            System.out.printf("Mean Mark: %.2f%n", module.calculateMean());
-            System.out.println("Minimum Mark: " + module.calculateMin());
-            System.out.println("Maximum Mark: " + module.calculateMax());
+        } else {
+            System.out.println("Module not found. Please ensure you entered the correct module code.");
         }
     }
 
