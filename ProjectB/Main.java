@@ -293,20 +293,33 @@ public class Main {
     }
 
     private static void displayGradeProfile() {
-        System.out.println("\n--- Grade Profile ---");
-        for (Module module : modules) {
-            System.out.println("\nModule: " + module.getModuleName());
-            if (module.getStudentMarks().isEmpty()) {
-                System.out.println("No marks available for this module.");
-                continue;
-            }
-            Map<String, Integer> profile = module.calculateGradeProfile();
-            int totalStudents = module.getStudentMarks().size();
+        Scanner scanner = new Scanner(System.in); // Add Scanner for user input
+        System.out.print("Enter module code: ");
+        String moduleCode = scanner.nextLine(); // Prompt user for module code
 
-            profile.forEach((grade, count) -> {
-                double percentage = (count / (double) totalStudents) * 100;
-                System.out.printf("%s: %.2f%% (%d student(s))%n", grade, percentage, count);
-            });
+        // Search for the module with the entered code
+        Module selectedModule = modules.stream()
+                .filter(module -> module.getModuleCode().equalsIgnoreCase(moduleCode))
+                .findFirst()
+                .orElse(null);
+
+        // Check if the module exists
+        if (selectedModule != null) {
+            System.out.println("\n--- Grade Profile ---");
+            System.out.println("Module: " + selectedModule.getModuleName());
+            if (selectedModule.getStudentMarks().isEmpty()) {
+                System.out.println("No marks available for this module.");
+            } else {
+                Map<String, Integer> profile = selectedModule.calculateGradeProfile();
+                int totalStudents = selectedModule.getStudentMarks().size();
+
+                profile.forEach((grade, count) -> {
+                    double percentage = (count / (double) totalStudents) * 100;
+                    System.out.printf("%s: %.2f%% (%d student(s))%n", grade, percentage, count);
+                });
+            }
+        } else {
+            System.out.println("Module not found. Please ensure you entered the correct module code.");
         }
     }
 }
