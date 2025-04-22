@@ -35,6 +35,19 @@ public class MainTest {
     }
 
     @Test
+    public void testEmptyStudentList() {
+        List<Student> students = new ArrayList<>(); // Create an empty list
+
+        Student student = students.stream()
+                .filter(s -> s.getStudentID().equals("100190217"))
+                .findFirst()
+                .orElse(null);
+
+        // Ensure the list is empty and returns null
+        assertNull(student);
+    }
+
+    @Test
     public void testFindModule() {
         List<Module> modules = new ArrayList<>();
         modules.add(new Module("COM4301", "Maths For Computing"));
@@ -56,5 +69,20 @@ public class MainTest {
 
         assertNull(module);
     }
+    @Test
+    public void testDeleteModule() {
+        List<Module> modules = new ArrayList<>();
+        modules.add(new Module("SWE4303", "Computing Infrastructure"));
+
+        // Remove the module
+        modules.removeIf(module -> module.getModuleCode().equals("SWE4303"));
+
+        // Ensure the module no longer exists
+        assertNull(modules.stream()
+                .filter(m -> m.getModuleCode().equals("SWE4303"))
+                .findFirst()
+                .orElse(null));
+    }
 }
+
 

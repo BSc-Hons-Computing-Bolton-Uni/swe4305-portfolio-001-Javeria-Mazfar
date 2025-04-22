@@ -4,6 +4,7 @@ import ProjectB.Module;
 import ProjectB.Student;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
@@ -27,6 +28,19 @@ public class ModuleTest {
 
         module.addOrUpdateStudentMark(student, 90); // Update mark
         assertEquals(90, (int) module.getStudentMarks().get(student));
+    }
+
+    @Test
+    public void testInvalidMarks() {
+        Module module = new Module("COM4301", "Maths For Computing");
+        Student student = new Student("100190240", "William");
+
+        // Attempt to add an invalid mark
+        int invalidMark = -10;
+        module.addOrUpdateStudentMark(student, invalidMark);
+
+        // Ensure the invalid mark was not stored
+        assertNull(module.getStudentMarks().get(student));
     }
 
     @Test
@@ -61,4 +75,5 @@ public class ModuleTest {
         assertEquals(1, (int) gradeProfile.get("D (Third Class)"));
     }
 }
+
 
