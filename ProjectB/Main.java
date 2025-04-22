@@ -161,8 +161,12 @@ public class Main {
     }
 
     private static void manageModules(Scanner scanner) {
-        System.out.println("1. Add Module\n2. Edit Module\n3. Delete Module");
-        int subChoice = getValidatedMenuChoice(scanner, "Enter your choice (1-3): ", 1, 3);
+        System.out.println("1. Add Module");
+        System.out.println("2. Edit Module");
+        System.out.println("3. Delete Module");
+        System.out.println("4. Print All Modules"); // Add Print All Modules option
+
+        int subChoice = getValidatedMenuChoice(scanner, "Enter your choice (1-4): ", 1, 4);
         scanner.nextLine(); // Consume newline
 
         switch (subChoice) {
@@ -195,6 +199,14 @@ public class Main {
                     System.out.println("Module removed successfully!");
                 } else {
                     System.out.println("Module not found!");
+                }
+            }
+            case 4 -> {
+                System.out.println("\n--- List of All Modules ---");
+                if (modules.isEmpty()) {
+                    System.out.println("No modules found.");
+                } else {
+                    modules.forEach(module -> System.out.println(module.getModuleCode() + ": " + module.getModuleName()));
                 }
             }
         }
