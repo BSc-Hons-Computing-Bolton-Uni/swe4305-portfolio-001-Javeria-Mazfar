@@ -106,8 +106,12 @@ public class Main {
 
     // Correct implementation of `manageStudents`
     private static void manageStudents(Scanner scanner) {
-        System.out.println("1. Add Student\n2. Edit Student\n3. Delete Student");
-        int subChoice = getValidatedMenuChoice(scanner, "Enter your choice (1-3): ", 1, 3);
+        System.out.println("1. Add Student");
+        System.out.println("2. Edit Student");
+        System.out.println("3. Delete Student");
+        System.out.println("4. Display All Students");
+
+        int subChoice = getValidatedMenuChoice(scanner, "Enter your choice (1-4): ", 1, 4);
         scanner.nextLine(); // Consume newline
 
         switch (subChoice) {
@@ -141,6 +145,10 @@ public class Main {
                 } else {
                     System.out.println("Student not found!");
                 }
+            }
+            case 4 -> {
+                System.out.println("Displaying all students:");
+                students.forEach(student -> System.out.println(student.getStudentID() + ": " + student.getName()));
             }
         }
     }
