@@ -67,12 +67,27 @@ public class Main {
         students.add(new Student("100190241", "Zara"));
 
 
-// Adding 5 modules with custom names
+// Adding all required modules
         modules.add(new Module("COM4301", "Maths For Computing"));
-        modules.add(new Module("COM4302", "CS Fundamentals"));
+        modules.add(new Module("COM4302", "Computer Science Fundamentals"));
         modules.add(new Module("SWE4303", "Computing Infrastructure"));
         modules.add(new Module("SWE4304", "Databases"));
-        modules.add(new Module("SWE4305", "OO Programming"));
+        modules.add(new Module("SWE4305", "Object Oriented Programming"));
+        modules.add(new Module("SWE5306", "Systems Analysis and Design"));
+        modules.add(new Module("SWE5307", "Web Design and Programming"));
+        modules.add(new Module("SWE5308", "Cloud Technologies"));
+        modules.add(new Module("SWE5304", "Advanced Databases and Big Data")); // Duplicate module code, confirm if correct
+        modules.add(new Module("SEC5304", "Advanced Operating Systems"));
+        modules.add(new Module("AIN5301", "Introduction to AI"));
+        modules.add(new Module("COM6300", "Research and Professional Issues"));
+        modules.add(new Module("COM6301", "Undergraduate Project"));
+        modules.add(new Module("AIN6301", "Natural Language Processing"));
+        modules.add(new Module("SEC6302", "Information Security Management"));
+        modules.add(new Module("SEC6305", "Operations Management"));
+        modules.add(new Module("SWE6302", "Applied Machine Learning"));
+        modules.add(new Module("SWE6303", "Software Quality Management"));
+        modules.add(new Module("SWE6304", "Emerging Technologies"));
+
 
 
         // Assigning random marks to students for each module
