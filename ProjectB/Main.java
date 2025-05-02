@@ -76,7 +76,7 @@ public class Main {
         modules.add(new Module("SWE5306", "Systems Analysis and Design"));
         modules.add(new Module("SWE5307", "Web Design and Programming"));
         modules.add(new Module("SWE5308", "Cloud Technologies"));
-        modules.add(new Module("SWE5304", "Advanced Databases and Big Data")); // Duplicate module code, confirm if correct
+        modules.add(new Module("SWE5304", "Advanced Databases and Big Data"));
         modules.add(new Module("SEC5304", "Advanced Operating Systems"));
         modules.add(new Module("AIN5301", "Introduction to AI"));
         modules.add(new Module("COM6300", "Research and Professional Issues"));
